@@ -81,6 +81,7 @@ class AllPay():
         :param post: post is a dictionary which allPay server sent to us.
         :return: a dictionary containing data the allpay server return to us.
         """
+        logger = logging.getLogger('pyallpay')
         returns = {}
         ar_parameter = {}
         check_mac_value = ''
@@ -112,14 +113,14 @@ class AllPay():
             sz_confirm_mac_value = do_str_replace((urllib.quote_plus(sz_confirm_mac_value)).lower(), False)
             sz_confirm_mac_value = hashlib.md5(sz_confirm_mac_value).hexdigest().upper()
 
-            self.logger.info('sz-checkMacValue: %s & checkMacValue: %s' % (sz_confirm_mac_value, check_mac_value))
+            logger.info('sz-checkMacValue: %s & checkMacValue: %s' % (sz_confirm_mac_value, check_mac_value))
 
             if sz_confirm_mac_value != check_mac_value:
                 return False
             else:
                 return returns
         except:
-            self.logger.info('Exception!')
+            logger.info('Exception!')
 
     def gen_check_out_form(self, dict_url, auto_send=True):
         """
