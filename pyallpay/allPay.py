@@ -23,6 +23,9 @@ class AllPay():
     def __init__(self, payment_conf, service_method='post'):
         self.url_dict = dict()
 
+	# Log
+	self.logger = logging.getLogger('pyallpay')
+
         # === BASIC CONFIG FOR ALLPAY ===
         self.service_method = service_method
         self.HASH_KEY = HASH_KEY
@@ -65,7 +68,7 @@ class AllPay():
 
         result_request_str = do_str_replace(urllib.quote(urllib.urlencode(sorted_dict), '+%').lower())
 
-        logging.info(urllib.quote(urllib.urlencode(sorted_dict), '+').lower())
+        self.logger.info(urllib.quote(urllib.urlencode(sorted_dict), '+').lower())
 
         # md5 encoding
         check_mac_value = hashlib.md5(result_request_str).hexdigest().upper()
@@ -78,7 +81,6 @@ class AllPay():
         :param post: post is a dictionary which allPay server sent to us.
         :return: a dictionary containing data the allpay server return to us.
         """
-        logging.info('inside the feedback')
         returns = {}
         ar_parameter = {}
         check_mac_value = ''
@@ -110,14 +112,14 @@ class AllPay():
             sz_confirm_mac_value = do_str_replace((urllib.quote_plus(sz_confirm_mac_value)).lower(), False)
             sz_confirm_mac_value = hashlib.md5(sz_confirm_mac_value).hexdigest().upper()
 
-            logging.info('sz-checkMacValue: %s & checkMacValue: %s' % (sz_confirm_mac_value, check_mac_value))
+            self.logger.info('sz-checkMacValue: %s & checkMacValue: %s' % (sz_confirm_mac_value, check_mac_value)')
 
             if sz_confirm_mac_value != check_mac_value:
                 return False
             else:
                 return returns
         except:
-            logging.info('Exception!')
+            self.logger.info('Exception!')
 
     def gen_check_out_form(self, dict_url, auto_send=True):
         """
