@@ -8,7 +8,7 @@ except:
 
 ALLPAY_SANDBOX = getattr(settings, 'ALLPAY_SANDBOX', True)
 AIO_SERVICE_URL = 'https://payment.allpay.com.tw/Cashier/AioCheckOut'
-AIO_SANDBOX_SERVICE_URL = 'http://payment-stage.allpay.com.tw/Cashier/AioCheckOut'
+AIO_SANDBOX_SERVICE_URL = 'https://payment-stage.allpay.com.tw/Cashier/AioCheckOut'
 
 '''
     Get these from AllPay management panel
