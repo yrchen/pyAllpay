@@ -8,6 +8,8 @@ from utilities import do_str_replace
 '''
     Configure your personal setting in setting.py
 '''
+from django.conf import settings
+
 from setting import HASH_IV, HASH_KEY
 from setting import AIO_SANDBOX_SERVICE_URL, AIO_SERVICE_URL, RETURN_URL, CLIENT_BACK_URL, PAYMENT_INFO_URL
 from setting import MERCHANT_ID
@@ -85,7 +87,8 @@ class AllPay():
             period_type_replace_map = {'Y': 'Year', 'M': 'Month', 'D': 'Day'}
             for key, val in post.iteritems():
 
-                print key, val
+                if settings.DEBUG:
+                    print key, val
                 if key == 'CheckMacValue':
                     check_mac_value = val
                 else:
