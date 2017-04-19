@@ -112,7 +112,7 @@ class AllPay():
             sz_confirm_mac_value = do_str_replace((urllib.quote_plus(sz_confirm_mac_value)).lower(), False)
             sz_confirm_mac_value = hashlib.md5(sz_confirm_mac_value).hexdigest().upper()
 
-            self.logger.info('sz-checkMacValue: %s & checkMacValue: %s' % (sz_confirm_mac_value, check_mac_value)')
+            self.logger.info('sz-checkMacValue: %s & checkMacValue: %s' % (sz_confirm_mac_value, check_mac_value))
 
             if sz_confirm_mac_value != check_mac_value:
                 return False
