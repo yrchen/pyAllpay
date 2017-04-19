@@ -101,6 +101,8 @@ class AllPay():
                     elif key == 'PeriodType':
                         for origin, replacement in period_type_replace_map.iteritems():
                             val = val.replace(origin, replacement)
+                    elif key == 'rtnmsg':
+                        val = val.encode('utf-8')
                     returns[key] = val
 
             sorted_returns = sorted(ar_parameter.iteritems())
