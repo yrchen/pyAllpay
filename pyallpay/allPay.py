@@ -28,7 +28,7 @@ class AllPay():
         self.service_url = AIO_SANDBOX_SERVICE_URL if self.is_sandbox else AIO_SERVICE_URL
 
         self.url_dict['MerchantID'] = MERCHANT_ID
-        self.url_dict['ReturnURL'] = RETURN_URL
+        self.url_dict['ReturnURL'] = RETURN_URL if not ('ReturnURL' in payment_conf) else payment_conf['ReturnURL']
 
         self.url_dict['MerchantTradeNo'] = hashlib.sha224(str(datetime.datetime.now())).hexdigest().upper() if not ('MerchantTradeNo' in payment_conf) else payment_conf['MerchantTradeNo']
         self.url_dict['PaymentType'] = 'aio'
